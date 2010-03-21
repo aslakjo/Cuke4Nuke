@@ -16,11 +16,35 @@ Feature: Load config file for step definition DLL
       """
     And a file named "bin/GeneratedStepDefinitions.dll.config" with:
       """
-      <?xml version="1.0"?>
-      <configuration>
-        <appSettings>
-          <add key="helloMessage" value="Hello Cuke4Nuke!" />
-        </appSettings>
+      <?xml version="1.0" encoding="utf-8" ?>
+	  <configuration>
+	  <configSections>
+			<section name="log4net" type="log4net.Config.Log4NetConfigurationSectionHandler, log4net" />
+		  </configSections>
+		  
+		  <appSettings>
+			<add key="helloMessage" value="Hello Cuke4Nuke!" />
+		  </appSettings>
+		  
+		  <log4net>
+			<root>
+			  <level value="ALL" />
+			  <appender-ref ref="LogFileAppender" />
+			</root>
+			<appender name="LogFileAppender" type="log4net.Appender.RollingFileAppender,log4net">
+			  <param name="File" value="Cuke4NukeLog.txt" />
+			  <param name="AppendToFile" value="true" />
+			  <rollingStyle value="Size" />
+			  <maxSizeRollBackups value="2" />
+			  <maximumFileSize value="100KB" />
+			  <staticLogFileName value="true" />
+			  <datePattern value="yyyyMMdd" />
+			  <layout type="log4net.Layout.PatternLayout">
+				<conversionPattern value="%date [%thread] %-5level %logger - %message%newline" />
+			  </layout>
+			</appender>
+		  </log4net>
+        
       </configuration>
       """
 
@@ -33,8 +57,8 @@ Feature: Load config file for step definition DLL
           public static void ConfigFileShouldLoad()
           {
             string expectedValue = "Hello Cuke4Nuke!";
-            string actualValue = System.Configuration.ConfigurationManager.AppSettings["helloMessage"];
-            if (actualValue != expectedValue)
+            string actualValue = System.Configuration.ConfigurationManager.AppSettings["helloMessage"]; 
+            if (!actualValue.Equals(expectedValue))
             {
               throw new Exception(
                 String.Format(
