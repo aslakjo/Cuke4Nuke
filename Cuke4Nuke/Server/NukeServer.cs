@@ -14,6 +14,7 @@ namespace Cuke4Nuke.Server
 
         public NukeServer(Listener listener, Options options)
         {
+            log.Debug("Starting server");
             _listener = listener;
             _options = options;
         }
