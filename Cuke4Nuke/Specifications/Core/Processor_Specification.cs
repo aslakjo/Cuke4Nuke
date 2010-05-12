@@ -216,7 +216,7 @@ namespace Cuke4Nuke.Specifications.Core
         [Test]
         public void Invoke_with_a_step_taking_a_double_should_convert_and_pass_the_correct_value()
         {
-            var request = CreateInvokeRequest(_stepDefinitionWithOneDoubleParameter.Id, "3.14");
+            var request = CreateInvokeRequest(_stepDefinitionWithOneDoubleParameter.Id, 3.14m.ToString());
             var response = _processor.Process(request);
             AssertSuccessResponse(response);
             Assert.That(_receivedParameters.Length, Is.EqualTo(1));
@@ -227,7 +227,7 @@ namespace Cuke4Nuke.Specifications.Core
         [Test]
         public void Invoke_with_a_step_taking_parameters_of_several_types_should_convert_and_pass_the_correct_values()
         {
-            var request = CreateInvokeRequest(_stepDefinitionWithIntDoubleAndStringParameters.Id, "42", "3.14", "foo");
+            var request = CreateInvokeRequest(_stepDefinitionWithIntDoubleAndStringParameters.Id, "42", 3.14m.ToString(), "foo");
             var response = _processor.Process(request);
             AssertSuccessResponse(response);
             Assert.That(_receivedParameters.Length, Is.EqualTo(3));
