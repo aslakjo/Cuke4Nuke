@@ -47,8 +47,6 @@ namespace Cuke4Nuke.Server
                                   }
                           };
             options.Parse(args);
-
-            Console.WriteLine(WaitForDebuger);
         }
 
         public void Write(TextWriter textWriter)
