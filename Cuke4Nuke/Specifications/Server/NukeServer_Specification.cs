@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System;
 
 using Cuke4Nuke.Core;
 using Cuke4Nuke.Server;
@@ -30,6 +31,45 @@ namespace Cuke4Nuke.Specifications.Server
             Assert.That(_listener.HasMessageLoggedListeners());
             Assert.That(_listener.StartCalled);
             Assert.That(_listener.StopCalled);
+        }
+
+        [Test]
+        public void Start_with_and_wait_for_a_debugger()
+        {
+            var mockDebuggerFacade = new MockDebugerFacade();
+            var server = new NukeServer(_listener, new Options(), mockDebuggerFacade);
+            
+            server.WaitForDebugerAndRun();
+
+            Assert.That(_listener.StartCalled);
+            Assert.That(mockDebuggerFacade.HasWaitBeenCalled());
+        }
+
+        [Test]
+        public void Start_with_minus_d_should_wait_for_a_debugger()
+        {
+            var mockDebugerFacade = new MockDebugerFacade();
+            var server = new NukeServer(_listener, new Options("-d"), mockDebugerFacade);
+
+            server.Start();
+
+            Assert.That(_listener.StartCalled);
+            Assert.That(mockDebugerFacade.HasWaitBeenCalled());
+        }
+
+        internal class MockDebugerFacade : IDebugerCommand
+        {
+            private bool _waitedForDebuger = false;
+
+            public bool HasWaitBeenCalled()
+            {
+                return _waitedForDebuger;
+            }
+
+            public void WaitForDebuger()
+            {
+                _waitedForDebuger = true;
+            }
         }
 
         class MockListener : Listener

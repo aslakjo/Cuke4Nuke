@@ -107,5 +107,26 @@ namespace Cuke4Nuke.Specifications.Server
             var options = new Options();
             options.Write(Console.Out);
         }
+
+        [Test]
+        public void Should_parse_minus_d_as_wait_for_debuger()
+        {
+            var options = new Options("-d");
+            Assert.That(options.WaitForDebuger);
+        }
+
+        [Test]
+        public void Should_parse_minus_debuger_as_wait_for_debuger()
+        {
+            var options = new Options("--debuger");
+            Assert.That(options.WaitForDebuger);
+        }
+
+        [Test]
+        public void Shold_not_set_wait_for_debuger_with_explicit_notice()
+        {
+            var options = new Options();
+            Assert.That(options.WaitForDebuger, Is.False);
+        }
     }
 }

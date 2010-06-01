@@ -11,7 +11,6 @@ namespace Cuke4Nuke.Server
         [STAThread]
         static void Main(string[] args)
         {
-            
             var options = new Options(args);
             var objectFactory = new ObjectFactory();
             var loader = new Loader(options.AssemblyPaths, objectFactory);

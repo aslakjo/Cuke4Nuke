@@ -11,11 +11,20 @@ namespace Cuke4Nuke.Server
 
         private readonly Listener _listener;
         readonly Options _options;
+        readonly IDebugerCommand _debugerCommand;
 
         public NukeServer(Listener listener, Options options)
         {
             _listener = listener;
             _options = options;
+            _debugerCommand = new DebugerCommand();
+        }
+
+        public NukeServer(Listener listner, Options options, IDebugerCommand debuggerCommand)
+        {
+            _listener = listner;
+            _options = options;
+            _debugerCommand = debuggerCommand;
         }
 
         public void Start()
@@ -23,11 +32,20 @@ namespace Cuke4Nuke.Server
             if (_options.ShowHelp)
             {
                 ShowHelp();
+            }else if(_options.WaitForDebuger)
+            {
+                WaitForDebugerAndRun();
             }
             else
             {
                 Run();
             }
+        }
+
+        public void WaitForDebugerAndRun()
+        {
+            _debugerCommand.WaitForDebuger();
+            Run();
         }
 
         void Run()
@@ -73,5 +91,7 @@ namespace Cuke4Nuke.Server
         {
             log.Info(message);
         }
+
+        
     }
 }

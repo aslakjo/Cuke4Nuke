@@ -14,6 +14,7 @@ namespace Cuke4Nuke.Server
         public int Port { get; set; }
         public bool ShowHelp { get; set; }
         public ICollection<string> AssemblyPaths { get; set; }
+        public bool WaitForDebuger { get; set; }
 
         private readonly OptionSet options;
 
@@ -38,9 +39,16 @@ namespace Cuke4Nuke.Server
                                   "h|?|help",
                                   "show this message and exit.",
                                   v => ShowHelp = v != null
+                                  },
+                              {
+                                  "d|debuger",
+                                  "Start the server and wait for a debuger to attache",
+                                  v => WaitForDebuger = v != null
                                   }
                           };
             options.Parse(args);
+
+            Console.WriteLine(WaitForDebuger);
         }
 
         public void Write(TextWriter textWriter)
