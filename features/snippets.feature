@@ -12,6 +12,7 @@ Feature: Print step definition snippets for undefined steps
   Scenario: Undefined prints snippet
     Given a file named "features/wired.feature" with:
       """
+		Feature: inline feature
         Scenario: Wired
           Given we're all wired
 
@@ -21,7 +22,7 @@ Feature: Print step definition snippets for undefined steps
     Then the output should contain
       """
       [Pending]
-      [Given(@"^we're all wired$")]
+      [Given (@"^we're all wired$")]
       public void WereAllWired()
       {
       }
@@ -30,6 +31,7 @@ Feature: Print step definition snippets for undefined steps
   Scenario: Snippet with a table
     Given a file named "features/wired.feature" with:
       """
+		Feature: inline feature
         Scenario: Wired
           Given we're all wired
             | who     |
@@ -42,7 +44,7 @@ Feature: Print step definition snippets for undefined steps
     Then the output should contain
       """
       [Pending]
-      [Given(@"^we're all wired$")]
+      [Given (@"^we're all wired$")]
       public void WereAllWired(Table table)
       {
       }
@@ -51,6 +53,7 @@ Feature: Print step definition snippets for undefined steps
   Scenario: Snippet with a multiline string
     Given a file named "features/wired.feature" with:
       """
+		Feature: inline feature
         Scenario: Wired
           Given we're all wired
             \"\"\"
@@ -63,7 +66,7 @@ Feature: Print step definition snippets for undefined steps
     Then the output should contain
       """
       [Pending]
-      [Given(@"^we're all wired$")]
+      [Given (@"^we're all wired$")]
       public void WereAllWired(string str)
       {
       }
@@ -72,6 +75,7 @@ Feature: Print step definition snippets for undefined steps
   Scenario: Snippet with a scenario outline
     Given a file named "features/wired.feature" with:
       """
+		Feature: inline feature
         Scenario Outline: Wired
           Given we're all <something>
 
@@ -86,7 +90,7 @@ Feature: Print step definition snippets for undefined steps
     Then the output should contain
       """
       [Pending]
-      [Given(@"^we're all wired$")]
+      [Given (@"^we're all wired$")]
       public void WereAllWired()
       {
       }
@@ -94,7 +98,7 @@ Feature: Print step definition snippets for undefined steps
     And the output should contain
       """
       [Pending]
-      [Given(@"^we're all not wired$")]
+      [Given (@"^we're all not wired$")]
       public void WereAllNotWired()
       {
       }
@@ -103,6 +107,7 @@ Feature: Print step definition snippets for undefined steps
   Scenario: Snippet with Background
     Given a file named "features/wired.feature" with:
       """
+		Feature: inline feature
         Background:
           Given something to do first
 
@@ -115,7 +120,7 @@ Feature: Print step definition snippets for undefined steps
     Then the output should contain
       """
       [Pending]
-      [Given(@"^we're all wired$")]
+      [Given (@"^we're all wired$")]
       public void WereAllWired()
       {
       }
@@ -123,7 +128,7 @@ Feature: Print step definition snippets for undefined steps
     And the output should contain
       """
       [Pending]
-      [Given(@"^something to do first$")]
+      [Given (@"^something to do first$")]
       public void SomethingToDoFirst()
       {
       }
@@ -132,6 +137,7 @@ Feature: Print step definition snippets for undefined steps
   Scenario: Snippet for step with trailing comma
     Given a file named "features/wired.feature" with:
       """
+		Feature: inline feature
         Scenario: Comma separated
           Given the separator is ,
 
@@ -142,7 +148,7 @@ Feature: Print step definition snippets for undefined steps
     And the output should contain
       """
       [Pending]
-      [Given(@"^the separator is ,$")]
+      [Given (@"^the separator is ,$")]
       public void TheSeparatorIs()
       {
       }
@@ -151,6 +157,7 @@ Feature: Print step definition snippets for undefined steps
    Scenario: Snippet for step with double quotes
      Given a file named "features/wired.feature" with:
       """
+		Feature: inline feature
         Scenario: Quotes
           Given I "love" quotes
 
@@ -159,5 +166,5 @@ Feature: Print step definition snippets for undefined steps
      When I run cucumber -f pretty
      Then the output should contain
       """
-      [Given(@"^I ""love"" quotes$")]
+      [Given (@"^I ""love"" quotes$")]
       """

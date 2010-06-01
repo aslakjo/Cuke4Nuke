@@ -12,6 +12,8 @@ Feature: Use table multi-line step arguments
   Scenario: Table in a Given
     Given a file named "features/table.feature" with:
       """
+	  Feature: inline feature
+	  
       Scenario: Shopping list
         Given I have a shopping list with the following items:
           | item      | count |
@@ -67,6 +69,7 @@ Feature: Use table multi-line step arguments
   Scenario: Table in a Then
     Given a file named "features/table.feature" with:
      """
+	 Feature: inline feature
      Scenario: Build a shopping list
        Given I need 3 cucumbers
        And I need 5 bananas
@@ -119,6 +122,7 @@ Feature: Use table multi-line step arguments
   Scenario: Table in a Then - Failed Diff
     Given a file named "features/table.feature" with:
      """
+	 Feature: inline feature
      Scenario: Build a shopping list
        Given I need 3 cucumbers
        And I need 5 bananas

@@ -12,6 +12,7 @@ Feature: Run .NET step definitions with shared state from Cucumber
   Scenario: Shared state in one step definition class
     Given a file named "features/adding.feature" with:
       """
+		Feature: inline feature
         Scenario: Adding
           Given 2 cukes
           When I add 2 more cukes
@@ -60,6 +61,7 @@ Feature: Run .NET step definitions with shared state from Cucumber
   Scenario: Multiple scenarios each get their own state
     Given a file named "features/adding.feature" with:
       """
+		Feature: inline feature
         Scenario: Adding with pickles
           Given 2 cukes
           And 2 pickles
@@ -132,6 +134,7 @@ Feature: Run .NET step definitions with shared state from Cucumber
   Scenario: Shared state between two step definition classes
     Given a file named "features/adding.feature" with:
       """
+		Feature: inline feature
         Scenario: Adding
           Given 2 cukes
           When I add 2 more cukes

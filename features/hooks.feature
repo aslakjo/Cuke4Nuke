@@ -12,6 +12,7 @@ Feature: Run .NET Before and After hooks from Cucumber
   Scenario: Before hook
     Given a file named "features/adding.feature" with:
       """
+		Feature: inline feature
         Scenario: Cuke count set in Before
           Then I should have 4 cukes
 
@@ -52,6 +53,7 @@ Feature: Run .NET Before and After hooks from Cucumber
   Scenario: After hook throws exception (how else do we know it's called?)
     Given a file named "features/adding.feature" with:
       """
+		Feature: inline feature
         Scenario: After hook defined
           Given a passing step
 

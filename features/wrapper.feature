@@ -4,6 +4,8 @@ Feature: Run Cuke4Nuke and Cucumber from a single command
     Given a standard Cucumber project directory structure
     And a file named "features/wired.feature" with:
       """
+		Feature: Innline wired feature
+		
         Scenario: Wired
           Given we're all wired
 
